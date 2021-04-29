@@ -1,10 +1,10 @@
 # RedisHelper
 
 ```java
-Planned:
+// Planned:
 
-Packet System -> Response Handler (Async AND Not Async responses) -> Exception Handler (Whenever an error occures we will provide a response).
-Packet Listening -> Allows you to listen from anywhere.
+// Packet System -> Response Handler (Async AND Not Async responses) -> Exception Handler (Whenever an error occures we will provide a response).
+// Packet Listening -> Allows you to listen from anywhere.
 
 void sendPacket(Packet packet, String channel);
 
