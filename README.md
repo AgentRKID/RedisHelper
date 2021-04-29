@@ -14,12 +14,22 @@ void sendPacket(Packet packet, String channel, PacketResponseHandler responseHan
 
 void sendPacket(Packet packet, String channel, PacketExceptionHandler exeptionHandler);
 
-class Packet {
+abstract class Packet {
    UUID packetUuid = UUID.randomUUID();
    String sentFrom;
    
    Packet(String sentFrom) {
       this.sentFrom = sentFrom; // On response we know if we need to resend a new packet to make sure they get it back or not.
+   }
+   
+   // Not required
+   JsonObject toJsonObject() {
+      // encode packet
+   }
+   
+   // Not required
+   void fromJsonObject() {
+     // decode packet
    }
 }
 
