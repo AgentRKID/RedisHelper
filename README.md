@@ -1,44 +1,6 @@
 # RedisHelper
+This was wrote in a day or two, it was wrote on 4/29/2021 7-9 PM (EST),
+It works fine, handles 100k+ Messages/Packets in 10 seconds, with barely any CPU usage or memory usage.
 
-```java
-// Planned:
-
-// Packet System -> Response Handler (Async AND Not Async responses) -> Exception Handler (Whenever an error occures we will provide a response).
-// Packet Listening -> Allows you to listen from anywhere.
-
-void sendPacket(Packet packet, String channel);
-
-void sendPacket(Packet packet, String channel, PacketResponseHandler responseHandler);
-
-void sendPacket(Packet packet, String channel, PacketResponseHandler responseHandler, PacketExceptionHander exceptionHandler);
-
-void sendPacket(Packet packet, String channel, PacketExceptionHandler exeptionHandler);
-
-abstract class Packet {
-   UUID packetUuid = UUID.randomUUID();
-   String sentFrom;
-   
-   Packet(String sentFrom) {
-      this.sentFrom = sentFrom; // On response we know if we need to resend a new packet to make sure they get it back or not.
-   }
-   
-   // Not required
-   JsonObject toJsonObject() {
-      // encode packet
-   }
-   
-   // Not required
-   void fromJsonObject() {
-     // decode packet
-   }
-}
-
-class PacketResponseHandler {
-   void handleResponse(Packet packet);
-}
-
-// Not sure if we will send back exception handling from other servers (maybe).
-class PacketExceptionHandler {
-   void handleException(Exception exception);
-}
-```
+### Pull Request
+If you have any updates/upgrades you'd like to make you can create a pull request, ill review it and leave comments/pull if i believe its effiecent enough to stay.
