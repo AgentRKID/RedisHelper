@@ -23,7 +23,7 @@ public class PacketPubSub extends JedisPubSub {
         try {
             // Create a new instance of
             // the packet class and deserialize
-            final Packet packet = (Packet) Class.forName(object.get("packetClass").getAsString()).newInstance();
+            final Packet packet = (Packet) Class.forName(object.get("packetClass").getAsString()).getConstructor().newInstance();
             packet.fromJsonObject(object);
 
             final UUID packetUuid = packet.getPacketUuid();
@@ -63,15 +63,17 @@ public class PacketPubSub extends JedisPubSub {
                     helper.sendPacket(responsePacket, sentFrom, true);
                 }
             }
-        } catch (Exception ignored) { }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**
-     * @param channel the channel to register
+     * @param channels the channels to register
      */
-    public void registerChannel(String channel) {
+    public void registerChannel(String... channels) {
         RedisHelper.EXECUTOR.execute(() -> helper.runRedisCommand(redis -> {
-            redis.subscribe(this, channel);
+            redis.subscribe(this, channels);
             return null;
         }));
     }

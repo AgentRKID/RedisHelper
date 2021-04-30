@@ -1,6 +1,5 @@
 package io.github.agentrkid.redis;
 
-import io.github.agentrkid.redis.packet.PacketPubSub;
 import io.github.agentrkid.redis.packet.PacketResponseHandler;
 import io.github.agentrkid.redis.packet.TestPacket;
 import io.github.agentrkid.redis.packet.listener.PacketHandler;
