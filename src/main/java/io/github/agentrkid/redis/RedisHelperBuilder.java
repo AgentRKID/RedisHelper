@@ -13,6 +13,7 @@ public class RedisHelperBuilder {
     private int timeoutTime = 30;
 
     private boolean useDefault;
+    private boolean removeResponse;
 
     public RedisHelperBuilder setOptions(RedisOptions options) {
         this.options = options;
@@ -39,8 +40,13 @@ public class RedisHelperBuilder {
         return this;
     }
 
+    public RedisHelperBuilder shouldRemoveResponse(boolean removeResponse) {
+        this.removeResponse = removeResponse;
+        return this;
+    }
+
     public RedisHelper build() {
-        return new RedisHelper(timeoutTime, timeoutUnit, sendingName, options, useDefault);
+        return new RedisHelper(timeoutTime, timeoutUnit, sendingName, options, useDefault, removeResponse);
     }
 
     public static RedisHelperBuilder newBuilder() {
