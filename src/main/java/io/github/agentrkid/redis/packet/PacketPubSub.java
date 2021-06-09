@@ -35,9 +35,12 @@ public class PacketPubSub extends JedisPubSub {
                 final PacketResponseHandler responseHandler = helper.getCachedResponseHandlers().getIfPresent(packetUuid);
 
                 if (responseHandler != null) {
+                    if (helper.isRemoveResponse()) {
+                        helper.getCachedResponseHandlers().asMap().remove(packetUuid);
+                    }
                     responseHandler.handleResponse(packet);
-                    return;
                 }
+                return;
             }
 
             final PacketReceiveEvent event = new PacketReceiveEvent(packet);

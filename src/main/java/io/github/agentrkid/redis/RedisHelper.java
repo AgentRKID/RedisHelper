@@ -40,14 +40,16 @@ public class RedisHelper {
     @Getter private final List<PacketListenerData> listeners = new ArrayList<>();
 
     @Getter private final String sendingName;
+    @Getter private final boolean removeResponse;
 
     @Getter private final JedisPool pool;
 
-    public RedisHelper(long handlerTimeout, TimeUnit timeoutUnit, String sendingName, RedisOptions options) {
+    public RedisHelper(long handlerTimeout, TimeUnit timeoutUnit, String sendingName, RedisOptions options, boolean useDefault, boolean removeResponse) {
         cachedResponseHandlers = CacheBuilder.newBuilder().expireAfterWrite(handlerTimeout, timeoutUnit).build();
         cachedExceptionHandlers = Maps.newConcurrentMap();
 
         this.sendingName = sendingName;
+        this.removeResponse = removeResponse;
 
         if (options == null) {
             this.pool = new JedisPool(new JedisPoolConfig(), "127.0.0.1", 6379);
@@ -61,8 +63,10 @@ public class RedisHelper {
             }
         }
 
-        // Direct pub sub allowing access directly
-        new PacketPubSub(this).registerChannel(sendingName);
+        if (useDefault) {
+            // Direct pub sub allowing access directly
+            new PacketPubSub(this).registerChannel(sendingName);
+        }
     }
 
     /**

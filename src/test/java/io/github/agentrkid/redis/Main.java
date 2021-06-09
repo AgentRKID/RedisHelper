@@ -25,8 +25,7 @@ public class Main implements PacketListener {
 
                 try {
                     Thread.sleep(25L);
-                } catch (Exception ignored) {
-                }
+                } catch (Exception ignored) { }
             }
         }).start();
     }

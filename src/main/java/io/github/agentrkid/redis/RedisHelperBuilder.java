@@ -12,6 +12,8 @@ public class RedisHelperBuilder {
     private TimeUnit timeoutUnit = TimeUnit.SECONDS;
     private int timeoutTime = 30;
 
+    private boolean useDefault;
+
     public RedisHelperBuilder setOptions(RedisOptions options) {
         this.options = options;
         return this;
@@ -32,8 +34,13 @@ public class RedisHelperBuilder {
         return this;
     }
 
+    public RedisHelperBuilder useDefaultPub(boolean useDefault) {
+        useDefault = useDefault;
+        return this;
+    }
+
     public RedisHelper build() {
-        return new RedisHelper(timeoutTime, timeoutUnit, sendingName, options);
+        return new RedisHelper(timeoutTime, timeoutUnit, sendingName, options, useDefault);
     }
 
     public static RedisHelperBuilder newBuilder() {
